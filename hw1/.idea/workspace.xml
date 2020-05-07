@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2da8a0a0-e7d8-47f4-a591-065be2372d0d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/northwestern/ssa/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/northwestern/ssa/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw2/src/main/java/edu/northwestern/ssa/api/Search.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hw2/src/main/java/edu/northwestern/ssa/api/Search.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../hw3/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1aCblL1s1PnvxNb6g0IYGPHtMBi" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../hw2/pom.xml" />
+  </component>
+  <component name="RunManager">
+    <configuration name="news-import [clean,package,exec:java...]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings">
+          <MavenRunnerSettings>
+            <option name="delegateBuildToMaven" value="false" />
+            <option name="environmentProperties">
+              <map>
+                <entry key="AWS_ACCESS_KEY_ID" value="AKIAIDT2E2HW4OGPLKRQ" />
+                <entry key="AWS_SECRET_ACCESS_KEY" value="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" />
+                <entry key="COMMON_CRAWL_FILENAME" value="crawl-data/CC-NEWS/2019/09/CC-NEWS-20190901022141-01066.warc.gz" />
+                <entry key="ELASTIC_SEARCH_HOST" value="search-yly0746-2vmuxamcpbrmb3bhc6ozh4vuv4.us-east-2.es.amazonaws.com" />
+                <entry key="ELASTIC_SEARCH_INDEX" value="my-index" />
+              </map>
+            </option>
+            <option name="jreName" value="#USE_PROJECT_JDK" />
+            <option name="mavenProperties">
+              <map />
+            </option>
+            <option name="passParentEnv" value="true" />
+            <option name="runMavenInBackground" value="true" />
+            <option name="skipTests" value="false" />
+            <option name="vmOptions" value="" />
+          </MavenRunnerSettings>
+        </option>
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="package" />
+                <option value="exec:java" />
+                <option value="-Dexec.mainClass=edu.northwestern.ssa.App" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2da8a0a0-e7d8-47f4-a591-065be2372d0d" name="Default Changelist" comment="" />
+      <created>1586242672018</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586242672018</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="234" y="39" key="#Customize_Threads_View" timestamp="1587117206850">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="234" y="39" key="#Customize_Threads_View/0.0.1280.760@0.0.1280.760" timestamp="1587117206850" />
+    <state x="234" y="39" key="#Notifications" timestamp="1586929994559">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="234" y="39" key="#Notifications/0.0.1280.760@0.0.1280.760" timestamp="1586929994559" />
+    <state x="97" y="35" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588856735787">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="97" y="35" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.760@0.0.1280.760" timestamp="1588856735787" />
+    <state x="382" y="183" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1588859844785">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="382" y="183" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.760@0.0.1280.760" timestamp="1588859844785" />
+    <state x="447" y="90" key="#com.intellij.ide.util.MemberChooser" timestamp="1587131375413">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="447" y="90" key="#com.intellij.ide.util.MemberChooser/0.0.1280.760@0.0.1280.760" timestamp="1587131375413" />
+    <state x="231" y="0" key="CommitChangelistDialog2" timestamp="1586952764416">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="231" y="0" key="CommitChangelistDialog2/0.0.1280.760@0.0.1280.760" timestamp="1586952764416" />
+    <state x="376" y="141" key="EnvironmentVariablesDialog" timestamp="1588856734877">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="376" y="141" key="EnvironmentVariablesDialog/0.0.1280.760@0.0.1280.760" timestamp="1588856734877" />
+    <state x="422" y="121" key="FileChooserDialogImpl" timestamp="1588844057673">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="422" y="121" key="FileChooserDialogImpl/0.0.1280.760@0.0.1280.760" timestamp="1588844057673" />
+    <state width="1049" height="180" key="GridCell.Tab.0.bottom" timestamp="1588866338450">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state width="1049" height="180" key="GridCell.Tab.0.bottom/0.0.1280.760@0.0.1280.760" timestamp="1588866338450" />
+    <state width="1049" height="180" key="GridCell.Tab.0.center" timestamp="1588866338450">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state width="1049" height="180" key="GridCell.Tab.0.center/0.0.1280.760@0.0.1280.760" timestamp="1588866338450" />
+    <state width="1049" height="180" key="GridCell.Tab.0.left" timestamp="1588866338449">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state width="1049" height="180" key="GridCell.Tab.0.left/0.0.1280.760@0.0.1280.760" timestamp="1588866338449" />
+    <state width="1049" height="180" key="GridCell.Tab.0.right" timestamp="1588866338450">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state width="1049" height="180" key="GridCell.Tab.0.right/0.0.1280.760@0.0.1280.760" timestamp="1588866338450" />
+    <state width="602" height="217" key="GridCell.Tab.1.bottom" timestamp="1587194821417">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state width="602" height="217" key="GridCell.Tab.1.bottom/0.0.1280.760@0.0.1280.760" timestamp="1587194821417" />
+    <state width="602" height="217" key="GridCell.Tab.1.center" timestamp="1587194821417">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state width="602" height="217" key="GridCell.Tab.1.center/0.0.1280.760@0.0.1280.760" timestamp="1587194821417" />
+    <state width="602" height="217" key="GridCell.Tab.1.left" timestamp="1587194821416">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state width="602" height="217" key="GridCell.Tab.1.left/0.0.1280.760@0.0.1280.760" timestamp="1587194821416" />
+    <state width="602" height="217" key="GridCell.Tab.1.right" timestamp="1587194821417">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state width="602" height="217" key="GridCell.Tab.1.right/0.0.1280.760@0.0.1280.760" timestamp="1587194821417" />
+    <state x="172" y="35" key="Maven.ArtifactSearchDialog" timestamp="1587131818176">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="172" y="35" key="Maven.ArtifactSearchDialog/0.0.1280.760@0.0.1280.760" timestamp="1587131818176" />
+    <state width="630" height="360" key="XDebugger.FullValuePopup" timestamp="1587130115861">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state width="630" height="360" key="XDebugger.FullValuePopup/0.0.1280.760@0.0.1280.760" timestamp="1587130115861" />
+    <state x="325" y="204" key="com.intellij.ide.util.TipDialog" timestamp="1587542885925">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="325" y="204" key="com.intellij.ide.util.TipDialog/0.0.1280.760@0.0.1280.760" timestamp="1587542885925" />
+    <state x="7" y="104" key="new project wizard" timestamp="1586939983134">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="7" y="104" key="new project wizard/0.0.1280.760@0.0.1280.760" timestamp="1586939983134" />
+    <state x="303" y="81" width="672" height="678" key="search.everywhere.popup" timestamp="1587117205152">
+      <screen x="0" y="0" width="1280" height="760" />
+    </state>
+    <state x="303" y="81" width="672" height="678" key="search.everywhere.popup/0.0.1280.760@0.0.1280.760" timestamp="1587117205152" />
+  </component>
+</project>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<!-- for reference, see:
+  -- https://dev.to/luispa/lets-try-react-without-nodejs-3a7
+  -- https://reactjs.org/docs/hello-world.html
+  -->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>React Local</title>
+  <script type="application/javascript" src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+  <script type="application/javascript" src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+  <script type="application/javascript" src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+  <!-- your custom CSS goes here: -->
+  <style>
+    em{font-weight: bolder}
+    #title {
+      text-align: center;
+      font-weight: bolder;
+      font-size: 60px;
+      color: transparent;
+      background-color : black;
+      text-shadow : rgba(255,255,255,0.5) 0 5px 6px, rgba(255,255,255,0.2) 1px 3px 3px;
+      -webkit-background-clip : text;
+    }
+    #form{
+      text-align: center;
+      font-family: Hobo std;
+    }
+    #querybox{
+      margin-top: 20px;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: solid 1px #E5E5E5;
+      border-radius: 18px;
+      outline: 0;
+      font: normal 13px/100% Verdana, Tahoma, sans-serif;
+      width: 600px;
+      background: #FFFFFF;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+      -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+      -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;   
+    }
+
+    #querybox:hover,#querybox:focus{
+      border-color: #C9C9C9;
+    }
+
+    #lang{
+      margin-left: 0%;
+    }
+    #date{
+      margin-left: 10%;
+    }
+
+    #prevBt{
+      margin-left: 10px;
+    }
+    #ntBt{
+      margin-left: 80%;
+    }
+    
+    .keywords{
+      color: red
+    }
+    .url{
+      font-size: x-small;
+    }
+  </style>
+
+  <!-- Maybe you want to use bootstrap to make it pretty? -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script type="text/babel">
+  // Obtain the root
+  const rootElement = document.getElementById('root')
+
+  class SearchApp extends React.Component {
+    constructor(props){
+      super(props);
+      this.state = {
+        offset: 0,
+        datalist: [],
+        query: '',
+        lang:null,
+        date:null,
+        Done:0,
+        current:0,
+        queryURL:'',
+        total:0,
+        Noresult:false,
+        keywords:[]
+      };
+      this.setquery = this.setquery.bind(this);
+      this.setdate = this.setdate.bind(this);
+      this.setlang = this.setlang.bind(this);
+      this.goToPre = this.goToPre.bind(this);
+      this.goToNt = this.goToNt.bind(this);
+      this.generateURL = this.generateURL.bind(this);
+      this.fetchData = this.fetchData.bind(this);
+    }
+
+    setquery(ev){
+      this.setState({
+        query: ev.target.value,
+        offset: 0,
+      },() => this.generateURL())
+    }
+
+    setlang(ev){
+      if (ev.target.checked){
+        this.setState({
+          lang:'en',
+          offset: 0,
+        },() => this.generateURL());
+      }else{
+        this.setState({
+          lang:null,
+          offset: 0,
+        },() => this.generateURL());
+      }
+    }
+
+    setdate(ev){
+      this.setState({
+        date: ev.target.value,
+        offset: 0,
+      },() => this.generateURL());
+    }
+
+    generateURL(){
+      let queryString = "http://ssa-hw2-backend.stevetarzia.com/api/search"
+      +"?query="+this.state.query
+      +"&offset="+this.state.offset;
+      if (this.state.lang != null) queryString += "&language=en";
+      if (this.state.date != null) queryString += ("&date="+this.state.date);
+      this.setState((state) => 
+      ({queryURL:queryString, current:state.current+1}),
+      () => this.fetchData(this.state)
+      );
+    }
+
+    fetchData(cur_state){
+      fetch(this.state.queryURL)
+      .then(response => response.json())
+		  .then(json => {
+        this.setState((state) => {
+          if (state.Done < cur_state.current){
+            if (json['total_results'] > 0){
+              return {total:json['total_results'],
+                    datalist:json['articles'],
+                    keywords:cur_state.query.split(" "),
+                    Done:cur_state.current,
+                    Noresult:false
+                  };
+            }else{return {Noresult:true,
+              Done:cur_state.current,};}
+          }
+        });
+      })
+      .catch(()=>{this.setState({Noresult:true,Done:cur_state.current,})})
+    }
+
+    goToPre(){
+      this.setState((state) => {
+        if (state.offset>0) return {offset:state.offset-10}
+      }
+      ,() => this.generateURL());
+    }
+
+    goToNt(){
+      this.setState((state) => {
+        if (state.offset+10<state.total) {
+        return {offset:state.offset+10}}
+      }
+      ,() => this.generateURL());
+    }
+
+    render() {
+      return (
+        <div id = "Wrapper">
+          <div id="title">Search Engine</div>
+          <div id = "form">
+            <input type="text" id="querybox" name="query" placeholder="Please input your search keywords" onChange={this.setquery}/><br/>
+            <span id="lang"> English Only<input type="checkbox" name="language" value="Checkbox_value" onClick={this.setlang}/></span>
+            <span id="date"> Date:<input type="date" name="date" onChange={this.setdate}/></span>
+          </div>
+          <div id = "buttons">
+            <button id="prevBt" onClick = {this.goToPre}>Previous Page</button>
+            <button id="ntBt" onClick = {this.goToNt}>Next Page</button>
+          </div>
+          {this.state.Noresult?
+            (<div>Sorry, Result No Found.</div>)
+            :
+            (<ResultList
+          datalist = {this.state.datalist}
+          keywords = {this.state.keywords}
+          ></ResultList>)}
+        </div>
+      );
+    }
+  }
+
+  class ResultList extends React.Component{
+    constructor(props){
+      super(props);
+    }
+
+    render(){
+      let rows = [];
+      let keywords = this.props.keywords;
+      this.props.datalist.map((data) => {
+        let text = [];
+        keywords.map((kw) =>{
+          let ind = data['txt'].toLowerCase().indexOf(kw.toLowerCase());
+          let len = kw.length;
+          text.push(
+            <div className='line'>{data['txt'].slice(ind-50,ind)}
+              <span className='keywords'>{data['txt'].slice(ind,ind+len)}</span>
+              {data['txt'].slice(ind+len,ind+50)}
+            ...</div>
+          );
+        })
+        rows.push(
+          <p>
+            <span style = {{color:"gray"}} className = 'url'>{data['url']}</span><br/>
+            <h5><a href = {data['url']}>{data['title']}</a></h5>
+            <p>{text}</p>
+          </p>
+        );
+      });
+      return <div>{rows}</div>;
+    }
+  }
+
+  // Use the ReactDOM.render to show your component on the browser
+  ReactDOM.render(
+    <SearchApp />,
+    rootElement
+  )
+</script>
+
+</body>
+
+</html>
