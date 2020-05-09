@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<!-- for reference, see:
+  -- https://dev.to/luispa/lets-try-react-without-nodejs-3a7
+  -- https://reactjs.org/docs/hello-world.html
+  -->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Scalable HW3</title>
+  <script type="application/javascript" src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+  <script type="application/javascript" src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+  <script type="application/javascript" src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+  <!-- your custom CSS goes here: -->
+  <style>
+    em{font-weight: bolder}
+
+    .inputFiled {
+      position: relative;
+      width: 300px;
+      background-color: grey;
+    }
+    .form {
+      width: 300px;
+      float: left;
+      text-align: center;
+    }
+    .content {
+      width: 1000px;
+      height: 500px;
+      float: right;
+    }
+    .url{
+      text-align: center;
+      text-decoration-line: underline;
+      color: blue;
+    }
+    .title{
+      text-align: center;
+      color:green;
+    }
+    mark{
+      background: red;
+    }
+    .previous{
+      background: yellow;
+    }
+    .next{
+      background: yellow;
+      float: right;
+    }
+
+  </style>
+
+  <!-- Maybe you want to use bootstrap to make it pretty? -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="vendor/mark.js/dist/mark.min.js"></script>
+
+  <script type="text/babel">
+  
+  // Obtain the root
+  const rootElement = document.getElementById('root');
+
+  
+
+  class SearchApp extends React.Component {
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        value: '',
+        year: '',
+        month: '',
+        day: '',
+        checkboxItems:[
+          {content:"en", checked:false},
+        ],
+        startDate: '',
+        offset: 0
+      };
+
+      this.handleTextChange = this.handleTextChange.bind(this);
+      this.handleFormSubmit = this.handleFormSubmit.bind(this);
+      this.handleYearChange = this.handleYearChange.bind(this);
+      this.handleMonthChange = this.handleMonthChange.bind(this);
+      this.handleDayChange = this.handleDayChange.bind(this);
+      
+      this.fetchData = this.fetchData.bind(this);
+    }
+
+    handleYearChange = (event) => {
+      this.setState({
+        year: event.target.value
+      })
+    }
+    handleMonthChange = (event) => {
+      this.setState({
+        month: event.target.value
+      })
+    }
+    handleDayChange = (event) => {
+      this.setState({
+        day: event.target.value
+      })
+    }
+
+
+    getVal = (index)=>{
+      var items = [...this.state.checkboxItems]
+      items[index].checked =!items[index].checked
+      this.setState({
+        checkboxItems:items
+      })
+    }
+  
+    handlePrePage = (event) => {
+      let prefix = "http://ssa-hw2-backend.stevetarzia.com/api/search?query=";
+      let url = prefix + this.state.value;
+      
+      event.preventDefault();
+
+      let languageList = [];
+      this.state.checkboxItems.map( item => {
+        if(item.checked == true){
+          languageList.push(item.content)
+        }
+      })
+      
+      let off = this.state.offset - 10;
+      //call fetch data function
+      this.fetchData(url, languageList, off);
+
+    }
+
+    handleNextPage = (event) => {
+      let prefix = "http://ssa-hw2-backend.stevetarzia.com/api/search?query=";
+      let url = prefix + this.state.value;
+      
+      event.preventDefault();
+
+      let languageList = [];
+      this.state.checkboxItems.map( item => {
+        if(item.checked == true){
+          languageList.push(item.content)
+        }
+      })
+      
+      let off = this.state.offset + 10;
+      //call fetch data function
+      this.fetchData(url, languageList, off);
+
+
+    }
+  
+    handleFormSubmit(event) {
+      let prefix = "http://ssa-hw2-backend.stevetarzia.com/api/search?query=";
+      let url = prefix + this.state.value;
+      console.log(url);
+      
+      event.preventDefault();
+
+      let languageList = [];
+      this.state.checkboxItems.map( item => {
+        if(item.checked == true){
+          languageList.push(item.content)
+        }
+        else{
+          languageList.push("all")
+        }
+      })
+      let off = 0;
+
+      //call fetch data function
+      this.fetchData(url, languageList, off);
+    }
+    
+    handleTextChange(event) {
+      this.setState({
+          value: event.target.value
+      });
+    }
+
+    fetchData(url, languageList, offset){
+      
+      console.log("Aaaaaa")
+      
+      const start = new Date(this.state.startDate);
+      if(languageList[0] == "en"){
+        url += "&language="+languageList[0];
+      }
+      
+      url += "&date=" + this.state.year + "-" + this.state.month + "-" + this.state.day;
+      url += "&offset=" + offset;
+
+       fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            
+            console.log(url)
+
+            const pic = data.articles.map((re) => {
+                const cur = new Date(re.date);     
+                  return(
+                    <div>
+                      <h4 className="title"> {re.title}</h4>
+                      <p className="url" onClick={()=> {
+                        event.preventDefault();
+                        window.location = re.url;
+                      }}> {re.url} </p>
+
+                      <div  id = "textPart">
+                        {re.txt.length > 1000 ?
+                          (
+                            <p>
+                                {re.txt.substring(1,1000)}...
+                                
+                              <a href={re.url}>Read more</a>
+                            </p>
+                          
+                          ) :
+                          <p>{text}</p>
+                        }
+                      </div>
+                      <br/>
+                    </div>
+                  )
+                
+              }
+             
+
+             )
+            this.setState({
+              data: pic,
+              offset: offset
+            })
+          });
+
+         
+    }
+
+    render() {
+      return (
+        <div>
+          <form className = "form" onSubmit={this.handleFormSubmit}>
+            <br/>
+            <br/>
+            <label>
+              Please enter your keywords to search:
+              <br/>
+              <br/>
+              <input className="inputFiled" type="text" name="searchWords" value={this.state.value} onChange = {this.handleTextChange}/>
+            </label>
+            <br/>
+            {
+              this.state.checkboxItems.map((ele,index)=>{
+                return (
+                  // reference: https://www.cnblogs.com/luguankun/p/11194938.html
+                  <span key={index}>
+                    <input type="checkbox" name="" value={index} checked={ele.checked} onChange={()=>this.getVal(index)}/><span>{ele.content}</span>
+                    <br/>
+                  </span>
+                )
+              })
+            }
+            <br/>
+
+            <p>Year</p>
+            <input type = "text" value={this.state.year} onChange = {this.handleYearChange}/>
+            <p>Month</p>
+            <input type = "text" value={this.state.month} onChange = {this.handleMonthChange}/>
+            <p>Day</p>
+            <input type = "text" value={this.state.day} onChange = {this.handleDayChange}/>
+
+            <br/>
+            <br/>
+            <br/>
+
+            <button type="submit" value="Submit" > SUBMIT </button>
+            </form>
+
+                 
+          <div className = "content">
+
+            <h1>Search Results</h1>
+            <br/>
+            <p>{this.state.data}</p>
+
+            <button className = "previous" onClick = {this.handlePrePage}> Previous Page </button>
+            <button className = "next" onClick = {this.handleNextPage}> Next Page </button>
+          </div>
+
+        </div>
+        
+
+
+      );
+    }
+  }
+
+
+  
+
+
+  // Use the ReactDOM.render to show your component on the browser
+  ReactDOM.render(
+    <SearchApp />,
+    rootElement
+  )
+</script>
+
+</body>
+
+</html>
